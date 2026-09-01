@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Imunologia — Prova 7 Aulas</title>
+<style>
+html,body{margin:0;min-height:100%;background:#0f172a;color:#e5e7eb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{min-height:100vh;display:grid;place-items:center}.box{max-width:560px;padding:32px;text-align:center}h1{font-size:clamp(26px,7vw,42px);margin:0 0 18px}.status{font-size:18px;color:#94a3b8;line-height:1.5}.err{color:#fca5a5;white-space:pre-wrap}.spin{width:34px;height:34px;margin:24px auto;border:4px solid #334155;border-top-color:#e5e7eb;border-radius:50%;animation:s .8s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="box"><h1>Imunologia</h1><div class="spin"></div><div id="status" class="status">Carregando o curso completo…</div></div>
+<script>
+(async()=>{
+ const status=document.getElementById('status');
+ try{
+   const url='https://pumhrdzmpevjraenzzyf.supabase.co/functions/v1/imuno-study?v=3-mobile';
+   const r=await fetch(url,{cache:'no-store'});
+   if(!r.ok) throw new Error('Servidor respondeu HTTP '+r.status);
+   const html=await r.text();
+   if(html.length<160000||!/^\s*<!doctype html>/i.test(html)) throw new Error('Conteúdo recebido incompleto ('+html.length+' caracteres).');
+   const mobileCss=`
+html,body{width:100%;max-width:100%;overflow-x:hidden}.layout,.main,main,.card,.section,.lesson-content,.quiz-shell{min-width:0}img,svg,canvas,video{max-width:100%;height:auto}.visual,.table-wrap{max-width:100%;-webkit-overflow-scrolling:touch}
+@media(max-width:640px){:root{--radius:15px}body{font-size:16px}.topbar{min-height:60px;gap:10px;padding:9px 10px;padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}.topbar h1{font-size:15px;line-height:1.2;overflow-wrap:anywhere}.eyebrow{font-size:10px;margin-bottom:2px}.icon-btn{width:40px;height:40px;flex:0 0 40px}.sidebar{top:60px;height:calc(100dvh - 60px);width:min(330px,92vw);padding:14px 10px}.main{width:100%;max-width:none;margin:0;padding:14px 10px calc(28px + env(safe-area-inset-bottom))}.hero{gap:12px;margin-bottom:16px}.hero h2{font-size:clamp(24px,8vw,30px);line-height:1.12}.hero p{font-size:15px;line-height:1.55;max-width:none}.badge{white-space:normal;text-align:center}.card{padding:14px;border-radius:15px}.card h3{overflow-wrap:anywhere}.section{margin:18px 0}.section-title{font-size:18px;line-height:1.25;align-items:flex-start}.lesson-content h3{margin-top:18px;font-size:18px;line-height:1.3}.lesson-content p,.lesson-content li{font-size:16px;line-height:1.65;overflow-wrap:anywhere}.lesson-content ul,.lesson-content ol{padding-left:20px}.source-note,.extra-note,.callout{padding:12px 13px}.lesson-toc{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;-webkit-overflow-scrolling:touch}.lesson-toc a{flex:0 0 auto}.grid-2,.grid-3,.grid-4,.concept-grid,.tree-row,.compare-two,.organ-map,.outcome-grid,.fork-branches,.split-children{grid-template-columns:1fr!important}.concept-grid,.organ-map{gap:9px}.organ{min-height:0;padding:13px}.organ b{font-size:18px}.timeline{grid-template-columns:1fr;gap:8px}.timeline-step{min-width:0}.mechanism,.extravasation,.pathway-grid{flex-direction:column;overflow:visible;min-width:0;gap:10px}.mechanism-step,.x-step,.pathway{min-width:0;width:100%}.mechanism-step:not(:last-child):after{content:'↓';right:auto;left:50%;top:auto;bottom:-15px;transform:translateX(-50%)}.pathway-arrow{align-self:center;transform:rotate(90deg)}.balance,.lock,.nk-decision,.lymphnode{grid-template-columns:1fr;gap:9px}.balance-center,.lock-symbol{transform:rotate(90deg);line-height:1}.nk-center{font-size:18px}.ln-ring{width:180px;height:180px;border-width:14px}.ln-b{top:18px;left:32px}.ln-t{top:70px;left:35px}.ln-med{bottom:16px;left:48px}.cell-map .cell-outline{min-width:0;width:100%;grid-template-columns:1fr;border-radius:22px;padding:12px;gap:8px}.vessel{min-width:0;width:100%;height:150px}.rolling-cell{width:76px;height:76px;left:35%;bottom:67px;font-size:12px}.endothelium{gap:4px;overflow:hidden}.endothelium span{font-size:9px;text-align:center}.complement-map{min-width:0;grid-template-columns:1fr}.c-converge,.c-down{grid-column:1}.c-down{flex-direction:column;align-items:stretch}.c-down span{text-align:center}.visual{padding:12px;margin:13px 0}.flow{align-items:stretch;gap:6px}.flow .node{flex:1 1 100%;width:100%}.flow .arrow{width:100%;text-align:center;transform:rotate(90deg);height:18px}.table-wrap{width:100%;overflow-x:auto}table{min-width:540px;font-size:14px}th,td{padding:9px 10px}.quiz-shell{width:100%;max-width:none;margin:0}.quiz-top{flex-direction:column;align-items:stretch;gap:8px}.quiz-top>*{min-width:0;max-width:100%}.question{font-size:19px;line-height:1.42;margin:10px 0 15px;overflow-wrap:anywhere}.choices{gap:9px}.choice{width:100%;min-height:50px;padding:13px 12px;font-size:16px;line-height:1.45;overflow-wrap:anywhere}.explanation{padding:13px;font-size:15px;line-height:1.6}.quiz-footer{flex-direction:column;align-items:stretch;gap:10px}.quiz-footer>.btn,.quiz-footer>button{width:100%}.confidence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:6px}.confidence .btn{width:100%;padding:10px 6px;font-size:13px}.filter-row{display:grid;grid-template-columns:1fr;gap:8px;margin:11px 0 16px}.filter-row select,.filter-row .btn,.filter-row button{width:100%;min-width:0}select{max-width:100%}.result-big{padding:22px 8px}.result-big .score{font-size:44px}.actions{display:grid;grid-template-columns:1fr;width:100%}.actions .btn,.actions button{width:100%}.source-item{flex-direction:column;align-items:flex-start;gap:8px}.source-item .btn{width:100%}.lesson-meta{flex-direction:column;gap:4px}.toast{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:none}}
+@media(max-width:380px){.main{padding-left:8px;padding-right:8px}.card{padding:12px}.question{font-size:18px}.confidence{grid-template-columns:1fr}}
+`;
+   const patched=html.replace('</head>','<style id="mobile-v11">'+mobileCss+'</style></head>');
+   status.textContent='Abrindo o curso…';
+   document.open();document.write(patched);document.close();
+ }catch(e){
+   document.querySelector('.spin')?.remove();status.className='status err';status.textContent='Não foi possível abrir o curso.\n'+(e&&e.message?e.message:String(e));
+ }
+})();
+</script>
+</body>
+</html>
